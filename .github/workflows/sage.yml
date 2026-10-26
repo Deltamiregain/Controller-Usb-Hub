@@ -1,0 +1,31 @@
+name: "Motion"
+run-name: "portland"
+"on":
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+jobs:
+  vineyard:
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    concurrency:
+      group: "beacon-${{ github.workflow }}"
+      cancel-in-progress: false
+    runs-on: ubuntu-22.04
+    environment:
+      name: "github-pages"
+      url: ${{ steps.BANNER.outputs.page_url }}
+    steps:
+      - name: "koala"
+        uses: actions/checkout@v5
+      - name: "rapids"
+        uses: actions/configure-pages@v6
+      - name: "otter"
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+      - name: "bison"
+        id: BANNER
+        uses: actions/deploy-pages@v5
